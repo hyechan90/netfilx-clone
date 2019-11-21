@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 2px 40px;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 `;
 
 const Logo = styled.img`
