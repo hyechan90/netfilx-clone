@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Movieitem = props => {
+const MovieItem = props => {
   return (
     <Wrapper>
       <div>{props.title}</div>
@@ -28,4 +28,4 @@ const Movieitem = props => {
   );
 };
 
-export default Movieitem;
+export default MovieItem;
