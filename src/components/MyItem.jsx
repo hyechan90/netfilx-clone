@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   height: 0;
   position: relative;
   margin-right: 10px;
-  transition: 0.3s;
   & > div {
     position: absolute;
     left: 0;
@@ -23,29 +22,23 @@ const Wrapper = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    background-color: #aaa;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
+    transition: 0.3s;
   }
 `;
 
-const MovieItem = props => {
+const MyItem = props => {
   return (
     <Wrapper>
-      <div>{props.title}</div>
-      <img
-        src={'http://image.tmdb.org/t/p/w185' + props.backdrop_path}
-        alt=""
-      />
+      <img src={'https' + props.backdrop_path} alt="" />
     </Wrapper>
   );
 };
 
-export default MovieItem;
+export default MyItem;

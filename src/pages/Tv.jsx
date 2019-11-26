@@ -12,23 +12,23 @@ const MovieContainerWrapper = styled.div`
   }
 `;
 
-class Main extends React.Component {
+class Tv extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
-      week_movie: []
+      tv: [],
+      week_tv: []
     };
   }
 
   componentDidMount() {
     axios
       .get(
-        'https://api.themoviedb.org/3/movie/popular?api_key=a36305ddf529faa0c37acbf47e633d08&language=ko-kr'
+        'https://api.themoviedb.org/3/tv/popular?api_key=a36305ddf529faa0c37acbf47e633d08&language=ko-kr'
       )
       .then(response => {
         console.log(response);
-        this.setState({ movies: response.data.results });
+        this.setState({ tv: response.data.results });
       })
       .catch(err => {
         console.log('err!', err);
@@ -36,12 +36,11 @@ class Main extends React.Component {
 
     axios
       .get(
-        'https://api.themoviedb.org/3/trending/movie/week?api_key=a36305ddf529faa0c37acbf47e633d08&language=ko-kr'
+        'https://api.themoviedb.org/3/trending/tv/week?api_key=a36305ddf529faa0c37acbf47e633d08&language=ko-kr'
       )
       .then(response => {
         console.log(response);
-
-        this.setState({ week_movie: response.data.results });
+        this.setState({ week_tv: response.data.results });
       })
       .catch(err => {
         console.log('err!', err);
@@ -54,12 +53,12 @@ class Main extends React.Component {
         <Banner />
         <Preview />
         <MovieContainerWrapper>
-          <MovieContainer title="유명한 영화" movies={this.state.movies} />
-          <MovieContainer title="이번주 영화" movies={this.state.week_movie} />
+          <MovieContainer title="유명한 프로그램" movies={this.state.tv} />
+          <MovieContainer title="이번주 프로그램" movies={this.state.week_tv} />
         </MovieContainerWrapper>
       </div>
     );
   }
 }
 
-export default withLayout(Main);
+export default withLayout(Tv);

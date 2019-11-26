@@ -12,12 +12,11 @@ const MovieContainerWrapper = styled.div`
   }
 `;
 
-class Main extends React.Component {
+class New extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
-      week_movie: []
+      vote: []
     };
   }
 
@@ -28,20 +27,10 @@ class Main extends React.Component {
       )
       .then(response => {
         console.log(response);
-        this.setState({ movies: response.data.results });
-      })
-      .catch(err => {
-        console.log('err!', err);
-      });
-
-    axios
-      .get(
-        'https://api.themoviedb.org/3/trending/movie/week?api_key=a36305ddf529faa0c37acbf47e633d08&language=ko-kr'
-      )
-      .then(response => {
-        console.log(response);
-
-        this.setState({ week_movie: response.data.results });
+        const vote_count = response.data.results.filter(
+          a => a.vote_count > 1000
+        );
+        this.setState({ vote: vote_count });
       })
       .catch(err => {
         console.log('err!', err);
@@ -54,12 +43,11 @@ class Main extends React.Component {
         <Banner />
         <Preview />
         <MovieContainerWrapper>
-          <MovieContainer title="유명한 영화" movies={this.state.movies} />
-          <MovieContainer title="이번주 영화" movies={this.state.week_movie} />
+          <MovieContainer title="최신 등록 콘텐츠" movies={this.state.vote} />
         </MovieContainerWrapper>
       </div>
     );
   }
 }
 
-export default withLayout(Main);
+export default withLayout(New);

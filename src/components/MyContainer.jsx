@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
-import MovieItem from './MovieItem';
+import MyItem from './MyItem';
 
-const BtnSize = '45px';
+const BtnSize = '50px';
 
 const Wrapper = styled.div`
   color: white;
@@ -11,7 +11,8 @@ const Wrapper = styled.div`
   overflow: visible;
   .title {
     font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 12px;
   }
   .container {
     position: relative;
@@ -46,7 +47,7 @@ const BtnRight = styled(BtnLeft)`
   right: none;
 `;
 
-const MovieContainer = props => {
+const MyContainer = props => {
   const [page, setPage] = React.useState(1);
   const [sliderWidth, setSliderWidth] = React.useState(0);
   const slider = React.useRef(undefined);
@@ -56,11 +57,11 @@ const MovieContainer = props => {
   }, []);
 
   const onClickLeft = () => {
-    setPage(page - 1);
+    if (page > 1) setPage(page - 1);
   };
 
   const onClickRight = () => {
-    setPage(page + 1);
+    if (page < props.movies.length / 5) setPage(page + 1);
   };
 
   return (
@@ -68,18 +69,15 @@ const MovieContainer = props => {
       <div className="title">{props.title}</div>
       <div className="container">
         <BtnLeft onClick={onClickLeft}>{'<'}</BtnLeft>
-        <BtnRight onClick={onClickRight}>></BtnRight>
+        <BtnRight onClick={onClickRight}>{'>'}</BtnRight>
         <div className="slider" ref={slider}>
           {(props.movies || []).map((value, idx) => (
-            <MovieItem
-              key={idx}
-              title={value.title}
-              backdrop_path={value.backdrop_path}
-            />
+            <MyItem key={idx} title={value.title} backdrop_path={value} />
           ))}
         </div>
       </div>
     </Wrapper>
   );
 };
-export default MovieContainer;
+
+export default MyContainer;
